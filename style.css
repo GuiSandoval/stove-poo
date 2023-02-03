@@ -6,13 +6,15 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  color: #fff
+  background: #252526;
+  color: #fff;
+  height: 100vh;
+
 }
 
 main {
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  background: #252526;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +23,10 @@ main {
 main .area-stove {
   display: flex;
   flex-direction: column;
-  height: 42rem;
+  min-height: 40rem;
+  max-height: 40rem;
+  overflow-y: auto;
+
   width: 100%;
   max-width: 42rem;
   display: flex;
@@ -29,6 +34,7 @@ main .area-stove {
   align-items: center;
   background: #1e1e1e;
   margin: 0  auto;
+  position: relative;
 }
 main .area-stove .button-create-stove {
   width: 10rem;
@@ -42,4 +48,13 @@ main .area-stove .button-create-stove {
   cursor: pointer;
   transition: all .3s;
   outline: none;
+}
+main .area-stove #stovesArea {
+  width: 100%;
+}
+main .area-stove #stovesArea .stove {
+  border: 1px solid #fff;
+  padding: 1rem;
+  margin-top: 1rem;
+  width: 100%;
 }

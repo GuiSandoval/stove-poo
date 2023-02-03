@@ -10,18 +10,39 @@
 <body>
   <main>
     <div class="area-stove">
-      <div class="stove-name">
-        <h1>Stove</h1>
-        <p id="stoveName"></p>
-      </div>
+      <button type="button" class="button-create-stove" onclick="createStove()">Create Stove</button>
+      <div id="stovesArea"></div>
     </div>
   </main>
   <script src="script.js"></script>
   <script>  
-  const stove = new Stove("Brand X", "Black", [60, 60, 90]);
-  console.log('stove');
-  console.log(stove);
-    document.getElementById('stoveName').innerHTML = stove.brand;
+    const COLORS_RANDOM = ['Black', 'White', 'Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Brown', 'Pink', 'Gray', 'Silver', 'Gold']; 
+    const areaStove = document.getElementById('stovesArea');
+    let totalStoves = 0;
+
+    function createStove () {
+      totalStoves++;
+      const colorPick = COLORS_RANDOM[Math.floor(Math.random() * COLORS_RANDOM.length)];
+      
+      const newStove = new Stove(`Stove ${totalStoves}`, colorPick, [60, 60, 90]);
+      const newStoveElement = document.createElement('div');
+      
+      console.log('newStove', newStove);
+      newStoveElement.classList.add('stove');
+      newStoveElement.innerHTML = `
+        <h2>${newStove.brand}</h2>
+        <p>Color: ${newStove.color}</p>
+        <p>Dimensions: ${newStove.dimensions[0]} x ${newStove.dimensions[1]} x ${newStove.dimensions[2]}</p>
+        <p>burners: ${newStove.burnersCount}</p>
+        <p>igniters: ${newStove.ignitersCount}</p>
+        <p>Oven: ${newStove.hasOven}</p>
+        <p>Colors of Ignites: ${newStove.igniters.map(i => `${i.id} - ${i.color}`)}</p>
+        <p>Oven Glass Dimensions: ${newStove.oven.doorGlassDimensions}
+      `;
+
+      areaStove.appendChild(newStoveElement);
+
+    }
   </script>
 </body>
 </html>
