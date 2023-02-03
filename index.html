@@ -18,30 +18,54 @@
   <script>  
     const COLORS_RANDOM = ['Black', 'White', 'Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Brown', 'Pink', 'Gray', 'Silver', 'Gold']; 
     const areaStove = document.getElementById('stovesArea');
-    let totalStoves = 0;
+    const totalStoves = [];
 
     function createStove () {
-      totalStoves++;
+      const idPick = totalStoves.length + 1
       const colorPick = COLORS_RANDOM[Math.floor(Math.random() * COLORS_RANDOM.length)];
       
-      const newStove = new Stove(`Stove ${totalStoves}`, colorPick, [60, 60, 90]);
+      const newStove = new Stove(idPick,`Stove ${idPick}`, colorPick, [60, 60, 90]);
       const newStoveElement = document.createElement('div');
       
-      console.log('newStove', newStove);
       newStoveElement.classList.add('stove');
       newStoveElement.innerHTML = `
         <h2>${newStove.brand}</h2>
-        <p>Color: ${newStove.color}</p>
+        <p>Color: <span class="background-color">${newStove.color} </span></p>
         <p>Dimensions: ${newStove.dimensions[0]} x ${newStove.dimensions[1]} x ${newStove.dimensions[2]}</p>
         <p>burners: ${newStove.burnersCount}</p>
         <p>igniters: ${newStove.ignitersCount}</p>
         <p>Oven: ${newStove.hasOven}</p>
-        <p>Colors of Ignites: ${newStove.igniters.map(i => `${i.id} - ${i.color}`)}</p>
+        <p>Colors of Ignites: ${newStove.igniters.map(i => `  ${i.id + 1} - <span class="background-color">${i.color}</span>` )}</p>
         <p>Oven Glass Dimensions: ${newStove.oven.doorGlassDimensions}
+        <p>Light: <span id="idLight${idPick}">${newStove.oven.hasLight}</span></p>
+        <button type="button" onclick="toggleLightSpecifiedStove(${newStove.id})">toggleLight</button>
       `;
 
       areaStove.appendChild(newStoveElement);
+      totalStoves.push(newStove);
 
+      renderBackgroundColor()
+
+    }
+
+    function toggleLightSpecifiedStove (stoveId) {
+      const stoveFinded = totalStoves.find(s => s.id === stoveId);
+      const lightElement = document.getElementById(`idLight${stoveId}`);
+      stoveFinded.oven.toggleLight();
+
+      lightElement.innerHTML = stoveFinded.oven.hasLight;
+    }
+
+    function renderBackgroundColor () {
+      const allElementsBackgroundColor = document.querySelectorAll('.background-color');
+      console.log("executou aqiu")
+      console.log(allElementsBackgroundColor)
+      allElementsBackgroundColor.forEach(element => {
+        let elementColorBox = document.createElement('div')
+        elementColorBox.classList.add('color-box')
+        elementColorBox.style.backgroundColor = element.innerHTML
+        element.appendChild(elementColorBox);
+      });
     }
   </script>
 </body>

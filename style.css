@@ -1,3 +1,4 @@
+/* GLOBALS */
 * {
   margin: 0;
   padding: 0;
@@ -9,9 +10,16 @@ body {
   background: #252526;
   color: #fff;
   height: 100vh;
-
+  
 }
 
+.color-box {
+  width: 1rem;
+  height: 1rem;
+  margin-left: .4rem;
+}
+
+/* SPECIFIED */
 main {
   height: 100%;
   width: 100%;
@@ -35,6 +43,12 @@ main .area-stove {
   background: #1e1e1e;
   margin: 0  auto;
   position: relative;
+}
+
+main .area-stove .stove > p,
+main .area-stove .stove > p > span {
+  display: flex;
+  flex-direction: row;
 }
 main .area-stove .button-create-stove {
   width: 10rem;

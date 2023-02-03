@@ -11,7 +11,8 @@ class Oven {
 
 
 class Stove {
-  constructor(brand, color, dimensions) {
+  constructor(id, brand, color, dimensions) {
+    this.id = id;
     this.brand = brand;
     this.color = color;
     this.dimensions = dimensions;
